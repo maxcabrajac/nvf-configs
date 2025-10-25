@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "ayu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746554958,
+        "narHash": "sha256-KIrnM0GwM47ZiVxKEhnRsyZCixVLjtWpCi09tiXpSAs=",
+        "owner": "Luxed",
+        "repo": "ayu-vim",
+        "rev": "e20d2be153691c12d4cc1880a01a99e44fce7885",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Luxed",
+        "repo": "ayu-vim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -74,11 +90,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1761349956,
-        "narHash": "sha256-tH3wHnOJms+U4k/rK2Nn1RfBrhffX92jLP/2VndSn0w=",
+        "lastModified": 1761656231,
+        "narHash": "sha256-EiED5k6gXTWoAIS8yQqi5mAX6ojnzpHwAQTS3ykeYMg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "02f2cb8e0feb4596d20cc52fda73ccee960e3538",
+        "rev": "e99366c665bdd53b7b500ccdc5226675cfc51f45",
         "type": "github"
       },
       "original": {
@@ -113,21 +129,23 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1761112426,
-        "narHash": "sha256-fa3fIyXP3xQhsPaZX4WsFwPM9g64EMOucfDEC4o8Nwc=",
+        "lastModified": 1761514959,
+        "narHash": "sha256-7xcjhq6lKupZGph2qAmHfBjTB9nKJs32+n/3iAkl36I=",
         "owner": "NotAShelf",
         "repo": "nvf",
-        "rev": "9b3e7bcf68ace2f07eb7478c40e45ce79332482b",
+        "rev": "96ba7b64862ec27becbd6846a9d5c05de1697f8e",
         "type": "github"
       },
       "original": {
         "owner": "NotAShelf",
+        "ref": "v0.8",
         "repo": "nvf",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
+        "ayu": "ayu",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",

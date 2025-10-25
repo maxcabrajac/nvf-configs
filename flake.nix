@@ -8,22 +8,23 @@
 		};
 
 		nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-		nvf.url = "github:NotAShelf/nvf";
+		nvf.url = "github:NotAShelf/nvf/v0.8";
+		ayu = { url = "github:Luxed/ayu-vim"; flake = false; };
 	};
 	outputs = { flake-parts, self, ... } @ inputs: flake-parts.lib.mkFlake { inherit inputs; } {
-		# Allow users to bring their own systems.
-		# «https://github.com/nix-systems/nix-systems»
 		systems = import inputs.systems;
-
-		perSystem = { pkgs, lib, ... }: {
+		perSystem = { pkgs, ... }: {
 			packages = let
 				nvfLib = inputs.nvf.lib;
 
 				modulesPerPackage = rec {
 					base = [
+						{ _module.args = { flakeInputs = inputs; };  }
 						./keybinds.nix
 					];
-					editor = base ++ [];
+					editor = base ++ [
+						./config.nix
+					];
 					pager = base ++ [];
 				};
 

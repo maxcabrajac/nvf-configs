@@ -13,7 +13,7 @@
 	};
 	outputs = { flake-parts, self, ... } @ inputs: flake-parts.lib.mkFlake { inherit inputs; } {
 		systems = import inputs.systems;
-		perSystem = { pkgs, ... }: {
+		perSystem = { pkgs, lib, ... }: {
 			packages = let
 				nvfLib = inputs.nvf.lib;
 
@@ -36,8 +36,13 @@
 					config.neovim
 				;
 				nvims = builtins.mapAttrs (_: mkNvim) modulesPerPackage;
+				renameBin = name: p: pkgs.writers.writeDashBin name ''${lib.getExe p}'';
 			in
-				nvims // { default = nvims.editor; }
+				lib.fold (a: b: a // b) {} [
+					nvims
+					(lib.mapAttrs' (name: p: { name = name + "-wrapped"; value = renameBin name p; }) nvims)
+					{ default = nvims.editor; }
+				]
 			;
 		};
 	};

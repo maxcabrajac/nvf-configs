@@ -44,11 +44,11 @@
 					config.neovim
 				;
 				nvims = builtins.mapAttrs (_: mkNvim) modulesPerPackage;
-				renameBin = name: p: pkgs.writers.writeDashBin name ''${lib.getExe p}'';
+				extractAndRenameMainBin = name: p: pkgs.linkFarm name [ { name = "bin/${name}"; path = lib.getExe p; } ];
 			in
 				lib.fold (a: b: a // b) {} [
 					nvims
-					(lib.mapAttrs' (name: p: { name = name + "-wrapped"; value = renameBin name p; }) nvims)
+					(lib.mapAttrs' (name: p: { name = name + "-wrapped"; value = extractAndRenameMainBin name p; }) nvims)
 					{ default = nvims.editor; }
 				]
 			;

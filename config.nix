@@ -32,7 +32,10 @@
 			enableExtraDiagnostics = true;
 
 			# Languages that will be supported in default and maximal configurations.
-			nix.enable = true;
+			nix = {
+				enable = true;
+				extraDiagnostics.types = [ "deadnix" ];
+			};
 			markdown.enable = true;
 
 			# Languages that are enabled in the maximal configuration.

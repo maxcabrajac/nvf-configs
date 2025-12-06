@@ -183,7 +183,10 @@
 
 		snippets.luasnip.enable = true;
 
-		treesitter.context.enable = true;
+		treesitter = {
+			context.enable = true;
+			grammars = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+		};
 
 		binds = {
 			whichKey.enable = true;

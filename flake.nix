@@ -46,7 +46,7 @@
 				nvims = builtins.mapAttrs (_: mkNvim) modulesPerPackage;
 				extractAndRenameMainBin = name: p: pkgs.linkFarm name [ { name = "bin/${name}"; path = lib.getExe p; } ];
 			in
-				lib.fold (a: b: a // b) {} [
+				lib.foldr (a: b: a // b) {} [
 					nvims
 					(lib.mapAttrs' (name: p: { name = name + "-wrapped"; value = extractAndRenameMainBin name p; }) nvims)
 					{ default = nvims.editor; }

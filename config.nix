@@ -69,7 +69,6 @@
 			# Languages that are enabled in the maximal configuration.
 			bash.enable = true;
 			clang.enable = true;
-			sql.enable = true;
 			go.enable = true;
 			python.enable = true;
 		};

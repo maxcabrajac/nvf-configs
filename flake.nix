@@ -2,7 +2,7 @@
 	description = "Neovim nvf-based config";
 	inputs = {
 		systems.url = "github:nix-systems/default";
-		nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+		nixpkgs.follows = "nvf/nixpkgs";
 
 		flake-parts = {
 			url = "github:hercules-ci/flake-parts";
@@ -10,11 +10,10 @@
 		};
 
 		nvf = {
-			url = "github:NotAShelf/nvf/v0.8";
+			url = "github:NotAShelf/nvf";
 			inputs = {
 				flake-parts.follows = "flake-parts";
 				systems.follows = "systems";
-				nixpkgs.follows = "nixpkgs";
 			};
 		};
 		ayu = { url = "github:Luxed/ayu-vim"; flake = false; };

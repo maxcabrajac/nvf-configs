@@ -70,6 +70,7 @@
 			bash.enable = true;
 			clang.enable = true;
 			go.enable = true;
+			rust.enable = true;
 			python.enable = true;
 		};
 

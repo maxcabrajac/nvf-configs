@@ -237,5 +237,9 @@
 			smartcase = true;
 			inccommand = "nosplit";
 		};
+
+		globals = {
+			no_man_maps = 1;
+		};
 	};
 }

@@ -138,7 +138,7 @@
 			{ name = "rnuToggle"; }
 		];
 
-		autocmds = [
+		autocmds = lib.flatten [
 			{
 				desc = "Highlight on yank";
 				event = [ "TextYankPost" ];
@@ -159,26 +159,32 @@
 					end
 				'';
 			}
-			{
-				group = "rnuToggle";
-				desc = "[rnuToggle] Enable";
-				event = [ "BufEnter" "FocusGained" "InsertLeave" ];
-				callback = lib.generators.mkLuaInline /* lua */''
-					function ()
-						vim.opt.relativenumber = true
-					end
-				'';
-			}
-			{
-				group = "rnuToggle";
-				desc = "[rnuToggle] Disable";
-				event = [ "BufLeave" "FocusLost" "InsertEnter" ];
-				callback = lib.generators.mkLuaInline /* lua */''
-					function ()
-						vim.opt.relativenumber = false
-					end
-				'';
-			}
+			(let
+				base = state: {
+					group = "rnuToggle";
+					callback = lib.generators.mkLuaInline /* lua */''
+						function ()
+							if vim.opt.number:get() then
+								vim.opt.relativenumber = ${lib.boolToString state}
+							end
+						end
+					'';
+				};
+				variants = {
+					enable = {
+						event = [ "BufEnter" "FocusGained" "InsertLeave" ];
+						state = true;
+					};
+					disable = {
+						event = [ "BufLeave" "FocusLost" "InsertEnter" ];
+						state = false;
+					};
+				};
+			in
+				variants
+				|> lib.mapAttrs (desc: { event, state }: { inherit desc event; } // (base state))
+				|> lib.attrValues
+			)
 		];
 
 		snippets.luasnip.enable = true;

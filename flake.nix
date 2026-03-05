@@ -18,6 +18,13 @@
 		};
 		ayu = { url = "github:Luxed/ayu-vim"; flake = false; };
 	};
+
+	nixConfig = {
+		extra-experimental-features = [
+			"pipe-operators"
+		];
+	};
+
 	outputs = { flake-parts, self, ... } @ inputs: flake-parts.lib.mkFlake { inherit inputs; } {
 		systems = import inputs.systems;
 		perSystem = { pkgs, lib, ... }: {

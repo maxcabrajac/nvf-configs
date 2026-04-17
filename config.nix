@@ -91,7 +91,6 @@
 				lazy = false;
 				after = ''vim.cmd("colorscheme ayu")'';
 			};
-
 			leap-nvim = {
 				package = "leap-nvim";
 				keys = [
@@ -121,6 +120,7 @@
 				'';
 			};
 		};
+
 		autocomplete = {
 			nvim-cmp = {
 				enable = true;
@@ -132,6 +132,11 @@
 					close = "<C-i>";
 				};
 			};
+		};
+
+		assistant.copilot = {
+			enable = true;
+			cmp.enable = true;
 		};
 
 		augroups = [
